@@ -1,4 +1,4 @@
-\chapter{A Propriedade Helly e Grafos EPG}
+\chapter{A propriedade Helly e grafos EPG}
 
 \begin{flushright}
 \begin{minipage}[t][0cm][b]{0.47\textwidth}
@@ -11,9 +11,17 @@ Talento é 1\% inspiração e 99\% transpiração. }
 Thomas Edison
 \end{flushright}
 
+Neste capítulo examinaremos as relações hierárquicas entre algumas classes EPG e EPG-Helly. Ademais, abordaremos representações $B_1$-EPG de alguns grafos que serão utilizados posteriormente. Primeiro, vamos observar como as classes $B_0$-EPG, $B_0$-EPG-Helly, $B_1$-EPG e $B_1$-EPG-Helly se relacionam, em seguida consideramos as representações $B_1$-EPG de $C_4$'s e do grafo octaedro. Por último, apresentaremos a prova de $NP$-completude do problema de reconhecimento de grafos $B_1$-EPG-Helly.
 
-É fácil construir representações EPG que verificam os seguintes lemas. 
 
+\section{Hierarquia de algumas classes EPG}
+
+Apesar das classes  $B_1$-EPG e $ B_1$-EPG-Helly não coincidirem, ver Lemma~\ref{lem:octaedronaohelly}, o mesmo não ocorre para as classes $ B_0$-EPG e $ B_0$-EPG-Helly, como observado no Lemma~\ref{lem:b0epg}.
+
+Primeiro, perceba que quando não restringimos o número de dobras de cada caminho podemos mostrar que qualquer grafo pode ser representado como um grafo EPG.
+É fácil construir representações EPG que verificam o seguinte lema. 
+
+ 
  
  \begin{lema} \cite{golumbic2009} \label{lem:todoGrafoEpg}
  Todo grafo é um grafo EPG.
@@ -27,6 +35,8 @@ Thomas Edison
  
  %Moreover, the same applies to EPG-Helly graphs. 
  
+ Com um pouco mais de esforço é possível mostrar também que todo grafo possui uma representação EPG que satisfaz a propriedade Helly. Um algoritmo que efetua essa construção é apresentado no Lema~\ref{lem:todoGrafoEpgHelly}.
+ 
  \begin{lema}\label{lem:todoGrafoEpgHelly}
  Todo grafo é um grafo EPG-Helly.
  \end{lema}
@@ -34,7 +44,7 @@ Thomas Edison
   \begin{proof}
   Seja $G$ um grafo com $n$ vértices $v_1, v_2, \dots, v_n$ e $\mu$ cliques maximais $C_1, C_2, \dots , C_{\mu }$. É possível construir uma representação EPG-Helly de $G$ usando uma grade $Q$ de tamanho $(\mu \times 2n)$. As linhas correspondem às cliques maximais e são enumeradas $1, 2, \dots , \mu$. Cada vértice $v_j$ corresponde ao par de colunas $j, j+n$. Cada clique maximal  $C_i$ é mapeada para uma aresta $(i,n), (i,n+1)$. Cada caminho $P_j$ contém todas arestas $(i,n), (i,n+1)$ correspondendo às cliques maximais $C_i$ contendo $v_i$.
   
-  Além disso, dois caminhos distintos $P_j,P_k$ intersectam nas arestas correspondendo às cliques maximais contendo $v_j,v_k$.
+  %Além disso, dois caminhos distintos $P_j,P_k$ intersectam nas arestas correspondendo às cliques maximais contendo $v_j,v_k$.
   
   Tome $v_j \in V(G)$, considere a clique maximal contendo $v_j$ em ordem ascendente de seus índices. O caminho $P_j$ representando $v_j$, inicia no vértice $(1,j)$ de $Q$ e desce na coluna $j$ até $(i,j)$, onde $C_i$ é a primeira clique contendo $v_j$ então $P_j$ dobra no vértice  $(i,j)$ e prossegue para a direita, atravessa a aresta $(i,n), (i,n+1)$ representando $C_i$. Então $P_j$ prossegue  sobre a linha $i$ até atingir o vértice  $(i, j+n)$, onde dobra novamente, descendo na coluna $j+n$ até atingir o vértice $(l,j), l>i$, onde $C_l$ está a próxima clique maximal contendo  $v_j$ onde ele dobra mais uma vez. O caminho prossegue a linha $l$, atravessando a aresta $(l,n),(l,n+1)$, e assim por diante, até que todas as arestas de $Q$ correspondendo às cliques maximais contendo $v_j$ terem sido atravessadas por $P_j$.   
   
@@ -52,34 +62,40 @@ Segue então que dois caminhos distintos, $P_j$ e $P_q$, intersectam-se exatamen
  \end{corollary}
  
 
-\section{Relações e Representações EPG Básicas}
-%{The Classes $B_1$-EPG and $B_1$-EPG-Helly}
+Note que a classe de grafos $B_0$-EPG coincide com a bem conhecida classe de grafos de intervalo, i.e. grafos de intersecção de intervalos sobre uma reta real. 
 
-Nessa seção examinaremos as relações hierárquicas entre algumas classes EPG e EPG-Helly. Em complemento, abordaremos representações $B_1$-EPG de alguns grafos que serão utilizados posteriormente. Primeiro, vamos observar como as classes $B_0$-EPG, $B_0$-EPG-Helly, $B_1$-EPG e $B_1$-EPG-Helly se relacionam, em seguida considramos as representações $B_1$-EPG de $C_4$'s.
-
-Apesar das classes  $B_1$-EPG e $ B_1$-EPG-Helly não coincidirem, ver Lemma~\ref{lem:octaedronaohelly}, o mesmo não ocorre para as classes $ B_0$-EPG e $ B_0$-EPG-Helly, como observado no Lemma~\ref{lem:b0epg}.
 
 \begin {lema} \label{lem:b0epg}
 Toda representação $ B_0$-EPG satisfaz a propriedade Helly.
 \end {lema}
-\begin {proof}
-Assuma por contradição que exista um grafo $G$ que admite uma representação $ B_0$-EPG que não satisfaz a propriedade Helly. Então, essa representação possui uma coleção minimal de caminhos mutuamente intersectantes $ \mathcal{P} = \{P_{1}, P_{2}, \ldots, P_{k} \} $ tal que $ P_{1} \cap P_{2} \cap \cdots \cap P_{k} = \emptyset, k \geq 3. $
-Por minimalidade, sabemos que  $ \bar{P_1} = \mathcal{P} \setminus \{P_1 \}$, $ \bar {P_2} = \mathcal{P} \setminus \{P_2 \} $ e $ \bar {P_3 } = \mathcal{P} \setminus \{P_3) \} $ são mutuamente intersectantes e satisfazem a propriedade Helly.
-Assim, existem os seguintes segmentos distintos $ s_{\bar{P_1}}, s_{\bar {P_2}}, s_{\bar {P_3}}$ associados com a intersecção de caminhos em $ \bar {P_1},  \bar {P_2} $ e $ \bar {P_3} $. Uma vez que a representação não possui caminhos com dobras, então sabemos que os caminhos em  $ \mathcal{P}$ estão sobre a mesma linha.
-Sem perda de generalidade, vamos assumir que  $ s_{ \bar {P_1}}, s_{ \bar {P_2}}$ e $ s_{ \bar {P_3}}$ ocorrem da esquerda para a direita nessa ordem. Uma vez que $ s_{\bar {P_3}}$ e $ s_{\bar {P_1}}$ intersectam $ P_2 $, e $ P_2 $ é um caminho sem dobra, então $ P_2$ intersecta $ s_{\bar {P_2}}$. Dessa forma temos uma contradição, pois $ s_{\bar {P_2}} $ intersecta todos os caminhos em $ \mathcal{P}$, contradizendo a hipótese de $ P_1 \cap P_2 \cap \cdots \cap P_k = \emptyset $.
-\end {proof}
+\begin{proof}
+A prova é imediata pela definição.
+\end{proof}
+
+% \begin {proof}
+% Assuma por contradição que exista um grafo $G$ que admite uma representação $ B_0$-EPG que não satisfaz a propriedade Helly. Então, essa representação possui uma coleção minimal de caminhos mutuamente intersectantes $ \mathcal{P} = \{P_{1}, P_{2}, \ldots, P_{k} \} $ tal que $ P_{1} \cap P_{2} \cap \cdots \cap P_{k} = \emptyset, k \geq 3. $
+% Por minimalidade, sabemos que  $ \bar{P_1} = \mathcal{P} \setminus \{P_1 \}$, $ \bar {P_2} = \mathcal{P} \setminus \{P_2 \} $ e $ \bar {P_3 } = \mathcal{P} \setminus \{P_3) \} $ são mutuamente intersectantes e satisfazem a propriedade Helly.
+% Assim, existem os seguintes segmentos distintos $ s_{\bar{P_1}}, s_{\bar {P_2}}, s_{\bar {P_3}}$ associados com a intersecção de caminhos em $ \bar {P_1},  \bar {P_2} $ e $ \bar {P_3} $. Uma vez que a representação não possui caminhos com dobras, então sabemos que os caminhos em  $ \mathcal{P}$ estão sobre a mesma linha.
+% Sem perda de generalidade, vamos assumir que  $ s_{ \bar {P_1}}, s_{ \bar {P_2}}$ e $ s_{ \bar {P_3}}$ ocorrem da esquerda para a direita nessa ordem. Uma vez que $ s_{\bar {P_3}}$ e $ s_{\bar {P_1}}$ intersectam $ P_2 $, e $ P_2 $ é um caminho sem dobra, então $ P_2$ intersecta $ s_{\bar {P_2}}$. Dessa forma temos uma contradição, pois $ s_{\bar {P_2}} $ intersecta todos os caminhos em $ \mathcal{P}$, contradizendo a hipótese de $ P_1 \cap P_2 \cap \cdots \cap P_k = \emptyset $.
+% \end {proof}
 %%%%%%%%%
 
 \begin{corollary}
 A classe $B_0$-EPG coincide com a classe $B_0$-EPG-Helly.
 \end{corollary}
 
-Grafos $B_0$-EPG coincidem com a classe de grafos de intervalo. O problema de reconhecimento de grafos de intervalo pode ser resolvido em tempo linear~\cite{booth1976}. Apesar de o problema de reconhecimento de grafos $ B_1$-EPG ser $\mathcal{NP}$-completo \cite {heldt2014}, os grafos $ B_1$-EPG-Helly formam uma subclasse propriamente contida em $ B_1$-EPG. Veja a Figura~\ref{fig:diagramaEPG},  além disso, a complexidade de reconhecimento da classe de grafos $ B_1$-EPG-Helly é um problema em aberto. 
+Grafos $B_0$-EPG coincidem com a classe de grafos de intervalo. O problema de reconhecimento de grafos de intervalo pode ser resolvido em tempo linear~\cite{booth1976}. Apesar de o problema de reconhecimento de grafos $ B_1$-EPG ser $NP$-completo \cite {heldt2014}, os grafos $ B_1$-EPG-Helly formam uma subclasse propriamente contida em $ B_1$-EPG, ver a Figura~\ref{fig:diagramaEPG}. Além disso, a complexidade de reconhecimento da classe de grafos $ B_1$-EPG-Helly foi um problema em aberto que foi resolvido por este trabalho. 
 
 O Lema \ref{lem:octaedronaohelly} mostra que as classes  $ B_1$-EPG e $ B_1$-EPG-Helly são distintas, observe o grafo octaedro $ O_3$, ver Figura~\ref{fig:octaedro}(a) que apresenta uma representação  $B_1$-EPG minimal, a menos de isomorfismos, como na Figura~\ref{fig:octaedro}(b). O grafo octaedro  $ O_3 $ pertence a $ B_1$-EPG mas não pertence a $B_1$-EPG-Helly.
 
 \input{./includes/include-img/diagramaEpg.tex}
 
+
+
+\section{Representações $B_1$-EPG para os grafos $C_4$ e Octaedro}
+%{The Classes $B_1$-EPG and $B_1$-EPG-Helly}
+
+A seguir definimos quais são as representações de um grafo $C_4$ em uma representação de dobra simples. Uma definição alternativa pode ser encontrada em~\cite{golumbic2009}, onde o autor demonstra que são somente essas as poucas representações possíveis para o ciclo induzido de tamanho 4.
 
 
 %By the results of \cite{golumbic2009}, in Lemma ~\ref{lem:representacaoC4}, every induced cycle of size 4 in a $ B_1$-EPG  representation  of $C_4$ has only a few possible representations.
@@ -149,7 +165,7 @@ Pelo Lema~\ref{lem:octaedronaohelly}, o grafo $ O_3 $ possui uma representação
 \section{Pertinência a $\mathcal{NP}$}
 
 %In this paper we are interested in characterizing the complexity of the $B_1$-EPG-Helly recognition problem, whose formal definition is presented next:
-Nessa seção, mostraremos que o problema de reconhecimento de grafos $B_k$-EPG-Helly, onde $k$ é limitado por um polinômio de $|V(G)|$, pertence a  $NP$. O problema pode ser formalmente descrico como segue:
+Nessa seção, mostraremos que o problema de reconhecimento de grafos $B_k$-EPG-Helly, onde $k$ é limitado por um polinômio de $|V(G)|$, pertence a  $\mathcal{NP}$. O problema pode ser formalmente descrico como segue:
 
 \input{./includes/include-tab/reconhecimentob1epghelly.tex}
 
@@ -232,13 +248,13 @@ Uma representação $B_k$-EPG de $G$ pode ser verificada em tempo polinomial, pa
 \end{theorem}
 
 
-\section{$\mathcal{NP}$-Dificuldade}\label{sec:sectionDispositivoClausula}
+\section{$NP$-Dificuldade}\label{sec:sectionDispositivoClausula}
 
 Agora provaremos que o reconhecimento de grafos   $B_1$-EPG-Helly é $NP$-completo. Para essa demonstração estabelecemos a redução do problema {\sc Positive (1 in 3)-3SAT} definido como segue:
 
 \input{./includes/include-tab/1em33sat.tex}
 
-{\sc Positive (1 in 3)-3SAT } é um problema $\mathcal{NP}$-completo bem conhecido (ver \cite{johnson1979}, problema [L04], pág. 259). {\sc Positive (1 in 3)-3SAT} permanece $\mathcal{NP}$-completo quando o grafo de incidência da fórmula CNF é um grafo planar~\cite{mulzer2008minimum}.
+{\sc Positive (1 in 3)-3SAT } é um problema $NP$-completo bem conhecido (ver \cite{johnson1979}, problema [L04], pág. 259). {\sc Positive (1 in 3)-3SAT} permanece $NP$-completo quando o grafo de incidência da fórmula CNF é um grafo planar~\cite{mulzer2008minimum}.
 
 Dado uma fórmula  $F$ que é uma instância de {\sc Positive (1 in 3)-3SAT} apresentaremos uma construção de tempo polinomial de um grafo $ G_F$ tal que  $ G_F $ é $ B_1$-EPG-Helly se e somente se $ F $ é satisfativa. Esse grafo conterá um subgrafo induzido  $ G_c$ com 12 vértices (chamado \emph {clause gadget}) para toda cláusula $ c \in C $, e um subgrafo induzido (\emph {variable gadget}) para cada variável $ x_j$, contendo um vértice especial   $ v_j$, mais um \emph{base gadget}  com 55 vértices adicionais.
 
